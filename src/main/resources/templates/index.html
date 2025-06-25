@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consultas Médicas</title>
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    
+    <!-- Estilos personalizados -->
+    <style>
+        body {
+            background: linear-gradient(135deg, #f0f2f5, #d6e4ff);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .container {
+            flex: 1;
+        }
+
+        .btn-lg {
+            width: 220px;
+            font-size: 1.2rem;
+        }
+
+        h1 {
+            font-weight: bold;
+            color: #003366;
+        }
+
+        .lead {
+            color: #333;
+        }
+
+        footer {
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container text-center mt-5">
+        <h1 class="mb-4">Sistema de Consultas Médicas</h1>
+        <p class="lead">Gestiona pacientes, médicos y sus consultas de manera ágil y eficiente.</p>
+        <div class="mt-5">
+            <a href="/pacientes" class="btn btn-outline-primary btn-lg m-2">Lista de Pacientes</a>
+            <a href="/medicos" class="btn btn-outline-info btn-lg m-2">Lista de Médicos</a>
+            <a href="/consultas" class="btn btn-outline-success btn-lg m-2">Nueva Consulta</a>
+            <a href="/citas" class="btn btn-outline-warning btn-lg m-2">Lista de Citas</a>
+        </div>
+    </div>
+
+    <footer class="text-center mt-5 mb-3 text-muted">
+        &copy; 2025 Sistema Médico - Desarrollado en Cibertec
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Lista de Pacientes</title>
+    <meta charset="UTF-8">
+</head>
+<body>
+    <h1>Pacientes</h1>
+    <a href="/pacientes/nuevo">Nuevo Paciente</a>
+    <br/><br/>
+    <table border="1" cellpadding="5" cellspacing="0">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>DNI</th>
+                <th>Teléfono</th>
+                <th>Fecha de Nacimiento</th>
+                <th>Alergias</th>
+                <th>Medicamentos</th>
+                <th>Diagnósticos</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="paciente : ${pacientes}">
+                <td th:text="${paciente.id}">1</td>
+                <td th:text="${paciente.nombre}">Juan Pérez</td>
+                <td th:text="${paciente.dni}">12345678</td>
+                <td th:text="${paciente.telefono}">987654321</td>
+                <td th:text="${paciente.fechaNacimiento}">1990-01-01</td>
+                <td th:text="${paciente.alergias}">Ninguna</td>
+                <td th:text="${paciente.medicamentosRecetados}">Ibuprofeno</td>
+                <td th:text="${paciente.diagnosticos}">Hipertensión</td>
+                <td>
+                    <a th:href="@{'/pacientes/editar/' + ${paciente.id}}">Editar</a> |
+                    <a th:href="@{'/pacientes/eliminar/' + ${paciente.id}}"
+                       onclick="return confirm('¿Seguro que desea eliminar?');">Eliminar</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

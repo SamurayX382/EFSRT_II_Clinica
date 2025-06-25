@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Lista de Consultas Médicas</title>
+</head>
+<body>
+    <h1>Consultas Médicas</h1>
+
+    <a href="/consultas/nuevo">Nueva Consulta</a>
+    <table border="1" cellpadding="5" cellspacing="0">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Fecha Consulta</th>
+                <th>Paciente</th>
+                <th>Diagnóstico</th>
+                <th>Tratamiento</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="consulta : ${consultas}">
+                <td th:text="${consulta.id}">1</td>
+                <td th:text="${#temporals.format(consulta.fechaConsulta, 'dd/MM/yyyy HH:mm')}">01/01/2025 10:00</td>
+                <td th:text="${consulta.paciente.nombre}">Juan Pérez</td>
+                <td th:text="${consulta.diagnostico}">Diagnóstico</td>
+                <td th:text="${consulta.tratamiento}">Tratamiento</td>
+                <td>
+                    <a th:href="@{'/consultas/editar/' + ${consulta.id}}">Editar</a> |
+                    <a th:href="@{'/consultas/eliminar/' + ${consulta.id}}" onclick="return confirm('¿Seguro que desea eliminar?');">Eliminar</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Formulario Paciente</title>
+    <meta charset="UTF-8">
+</head>
+<body>
+    <h1>Formulario de Paciente</h1>
+	
+    
+    <form th:action="@{/pacientes/guardar}" th:object="${paciente}" method="post">
+        <input type="hidden" th:field="*{id}" />
+        
+        <label>Nombre:</label>
+        <input type="text" th:field="*{nombre}" required /><br/><br/>
+        
+        <label>DNI:</label>
+        <input type="text" th:field="*{dni}" required /><br/><br/>
+        
+        <label>Teléfono:</label>
+        <input type="text" th:field="*{telefono}" /><br/><br/>
+        
+        <label>Fecha de Nacimiento:</label>
+        <input type="date" th:field="*{fechaNacimiento}" required /><br/><br/>
+        
+        <label>Historial Médico:</label><br/>
+        <textarea th:field="*{historialMedico}" rows="4" cols="50"></textarea><br/><br/>
+        
+        <label>Alergias:</label><br/>
+        <textarea th:field="*{alergias}" rows="2" cols="50"></textarea><br/><br/>
+        
+        <label>Medicamentos Recetados:</label><br/>
+        <textarea th:field="*{medicamentosRecetados}" rows="2" cols="50"></textarea><br/><br/>
+        
+        <label>Diagnósticos:</label><br/>
+        <textarea th:field="*{diagnosticos}" rows="3" cols="50"></textarea><br/><br/>
+        
+        <button type="submit">Guardar</button>
+    </form>
+
+    <br/>
+    <a th:href="@{/pacientes}">Volver a la lista</a>
+</body>
+</html>
