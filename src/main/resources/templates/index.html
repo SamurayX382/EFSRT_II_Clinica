@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Consultas Médicas</title>
 
     <!-- Bootstrap -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+
     <!-- Estilos personalizados -->
     <style>
         body {
@@ -19,11 +19,6 @@
 
         .container {
             flex: 1;
-        }
-
-        .btn-lg {
-            width: 220px;
-            font-size: 1.2rem;
         }
 
         h1 {
@@ -38,13 +33,34 @@
         footer {
             font-size: 0.9rem;
         }
+
+        /* Botones cuadrados */
+        .btn-lg {
+            width: 220px;
+            height: 220px;
+            font-size: 1.2rem;
+            border-radius: 0.25rem; /* bordes un poco redondeados, quita si quieres totalmente cuadrados */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: transform 0.3s ease;
+            text-align: center;
+            white-space: normal; /* permite texto en varias líneas */
+            padding: 1rem;
+        }
+
+        /* Efecto agrandar al pasar el mouse */
+        .btn-lg:hover {
+            transform: scale(1.1);
+            z-index: 10;
+        }
     </style>
 </head>
 <body>
     <div class="container text-center mt-5">
         <h1 class="mb-4">Sistema de Consultas Médicas</h1>
         <p class="lead">Gestiona pacientes, médicos y sus consultas de manera ágil y eficiente.</p>
-        <div class="mt-5">
+        <div class="mt-5 d-flex flex-wrap justify-content-center gap-3">
             <a href="/pacientes" class="btn btn-outline-primary btn-lg m-2">Lista de Pacientes</a>
             <a href="/medicos" class="btn btn-outline-info btn-lg m-2">Lista de Médicos</a>
             <a href="/consultas" class="btn btn-outline-success btn-lg m-2">Nueva Consulta</a>
