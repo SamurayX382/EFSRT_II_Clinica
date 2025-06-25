@@ -1,0 +1,33 @@
+<!-- fragments/header.html -->
+<header class="bg-primary text-white shadow-sm">
+  <div class="container d-flex flex-wrap align-items-center justify-content-between py-3">
+    <a href="/" class="d-flex align-items-center text-white text-decoration-none">
+      <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-heart-pulse-fill mr-2" viewBox="0 0 16 16">
+        <path d="M1 5.5a4.5 4.5 0 0 1 7.197-3.388c.524.524.946 1.272 1.365 2.21.388.855.77 1.847 1.23 2.767.47.935.974 1.85 1.494 2.535a.5.5 0 0 1-.848.53l-2.28-2.834-1.332 4.327-2.085-2.88-2.546 2.638A4.5 4.5 0 0 1 1 5.5z"/>
+      </svg>
+      <span class="fs-4 font-weight-bold">Sistema Médico</span>
+    </a>
+
+    <nav class="nav nav-pills">
+      <a class="nav-link text-white" href="/">Inicio</a>
+      <a class="nav-link text-white" href="/pacientes">Pacientes</a>
+      <a class="nav-link text-white" href="/medicos">Médicos</a>
+      <a class="nav-link text-white" href="/consultas">Consultas</a>
+      <a class="nav-link text-white" href="/citas">Citas</a>
+    </nav>
+  </div>
+</header>
+
+<style>
+  header {
+    background: linear-gradient(90deg, #1e3c72, #2a5298);
+  }
+  .nav-link:hover, .nav-link.active {
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 0.375rem;
+    transition: background-color 0.3s ease;
+  }
+  .nav-link {
+    transition: background-color 0.3s ease;
+  }
+</style>
