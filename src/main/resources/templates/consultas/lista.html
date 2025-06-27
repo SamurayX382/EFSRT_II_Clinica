@@ -1,36 +1,114 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
 <head>
+    <meta charset="UTF-8">
     <title>Lista de Consultas Médicas</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+    <style>
+        body {
+            background: linear-gradient(135deg, #f0f2f5, #d6e4ff);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .container {
+            flex: 1;
+            margin-top: 60px;
+        }
+
+        h1 {
+            color: #003366;
+            font-weight: bold;
+        }
+
+        .btn-primary {
+            background-color: #003366;
+            border-color: #003366;
+        }
+
+        footer {
+            font-size: 0.9rem;
+        }
+    </style>
 </head>
 <body>
-    <h1>Consultas Médicas</h1>
+	<!-- Navbar debe ir dentro del body -->
+	    <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+	      <div class="container">
+	        <a class="navbar-brand font-weight-bold" href="/">Sistema Médico</a>
+	        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" 
+	          aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+	          <span class="navbar-toggler-icon"></span>
+	        </button>
+	        <div class="collapse navbar-collapse" id="navbarNav">
+	          <ul class="navbar-nav ml-auto">
+	            <li class="nav-item">
+	              <a class="nav-link" th:href="@{/pacientes}">Pacientes</a>
+	            </li>
+	            <li class="nav-item">
+	              <a class="nav-link" th:href="@{/medicos}">Médicos</a>
+	            </li>
+	            <li class="nav-item">
+	              <a class="nav-link" th:href="@{/consultas}">Consultas</a>
+	            </li>
+	            <li class="nav-item">
+	              <a class="nav-link" th:href="@{/citas}">Citas</a>
+	            </li>
+	          </ul>
+	        </div>
+	      </div>
+	    </nav>
 
-    <a href="/consultas/nuevo">Nueva Consulta</a>
-    <table border="1" cellpadding="5" cellspacing="0">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Fecha Consulta</th>
-                <th>Paciente</th>
-                <th>Diagnóstico</th>
-                <th>Tratamiento</th>
-                <th>Acciones</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr th:each="consulta : ${consultas}">
-                <td th:text="${consulta.id}">1</td>
-                <td th:text="${#temporals.format(consulta.fechaConsulta, 'dd/MM/yyyy HH:mm')}">01/01/2025 10:00</td>
-                <td th:text="${consulta.paciente.nombre}">Juan Pérez</td>
-                <td th:text="${consulta.diagnostico}">Diagnóstico</td>
-                <td th:text="${consulta.tratamiento}">Tratamiento</td>
-                <td>
-                    <a th:href="@{'/consultas/editar/' + ${consulta.id}}">Editar</a> |
-                    <a th:href="@{'/consultas/eliminar/' + ${consulta.id}}" onclick="return confirm('¿Seguro que desea eliminar?');">Eliminar</a>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+	    <!-- Espacio para que no quede detrás del navbar fijo -->
+	    <div style="height: 56px;"></div> 
+    <div class="container">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h1>Consultas Médicas</h1>
+            <a href="/consultas/nuevo" class="btn btn-primary">➕ Nueva Consulta</a>
+        </div>
+
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover table-striped align-middle shadow-sm">
+                <thead class="table-dark text-center">
+                    <tr>
+                        <th>ID</th>
+                        <th>Fecha Consulta</th>
+                        <th>Paciente</th>
+                        <th>Diagnóstico</th>
+                        <th>Tratamiento</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody class="text-center">
+                    <tr th:each="consulta : ${consultas}">
+                        <td th:text="${consulta.id}">1</td>
+                        <td th:text="${#temporals.format(consulta.fechaConsulta, 'dd/MM/yyyy HH:mm')}">01/01/2025 10:00</td>
+                        <td th:text="${consulta.paciente.nombre}">Juan Pérez</td>
+                        <td th:text="${consulta.diagnostico}">Diagnóstico</td>
+                        <td th:text="${consulta.tratamiento}">Tratamiento</td>
+                        <td>
+                            <a th:href="@{'/consultas/editar/' + ${consulta.id}}" class="btn btn-sm btn-warning me-1">✏️</a>
+                            <a th:href="@{'/consultas/eliminar/' + ${consulta.id}}"
+                               onclick="return confirm('¿Seguro que desea eliminar esta consulta?');"
+                               class="btn btn-sm btn-danger">🗑️</a>
+                        </td>
+                    </tr>
+                    <tr th:if="${#lists.isEmpty(consultas)}">
+                        <td colspan="6" class="text-center text-muted">No hay consultas registradas.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <footer class="text-center mt-5 mb-3 text-muted">
+        &copy; 2025 Sistema Médico
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

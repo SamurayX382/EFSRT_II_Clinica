@@ -1,37 +1,89 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
 <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Formulario Consulta Médica</title>
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            background: linear-gradient(135deg, #f0f2f5, #d6e4ff);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .container {
+            flex: 1;
+            max-width: 700px;
+            background-color: white;
+            padding: 2.5rem;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            margin-top: 60px;
+        }
+
+        h2 {
+            font-weight: bold;
+            color: #003366;
+        }
+
+        label {
+            font-weight: 500;
+        }
+
+        footer {
+            font-size: 0.9rem;
+        }
+    </style>
 </head>
 <body>
-    <h1>Consulta Médica</h1>
+    <div class="container">
+        <h2 class="mb-4 text-center">Consulta Médica</h2>
 
-    <form th:action="@{/consultas/guardar}" th:object="${consulta}" method="post">
-        <input type="hidden" th:field="*{id}" />
+        <form th:action="@{/consultas/guardar}" th:object="${consulta}" method="post">
+            <input type="hidden" th:field="*{id}" />
 
-        <label>Fecha Consulta:</label>
-        <input type="datetime-local" th:field="*{fechaConsulta}" />
-        <br/><br/>
+            <div class="mb-3">
+                <label class="form-label">Fecha de Consulta:</label>
+                <input type="datetime-local" th:field="*{fechaConsulta}" class="form-control" required />
+            </div>
 
-        <label>Paciente:</label>
-        <select th:field="*{paciente.id}">
-            <option value="" disabled>-- Seleccionar Paciente --</option>
-            <option th:each="paciente : ${pacientes}"
-                    th:value="${paciente.id}"
-                    th:text="${paciente.nombre}">Paciente Nombre</option>
-        </select>
-        <br/><br/>
+            <div class="mb-3">
+                <label class="form-label">Paciente:</label>
+                <select th:field="*{paciente.id}" class="form-select" required>
+                    <option value="" disabled selected>-- Seleccionar Paciente --</option>
+                    <option th:each="paciente : ${pacientes}"
+                            th:value="${paciente.id}"
+                            th:text="${paciente.nombre}">Paciente Nombre</option>
+                </select>
+            </div>
 
-        <label>Diagnóstico:</label>
-        <input type="text" th:field="*{diagnostico}" />
-        <br/><br/>
+            <div class="mb-3">
+                <label class="form-label">Diagnóstico:</label>
+                <input type="text" th:field="*{diagnostico}" class="form-control" required />
+            </div>
 
-        <label>Tratamiento:</label>
-        <input type="text" th:field="*{tratamiento}" />
-        <br/><br/>
+            <div class="mb-3">
+                <label class="form-label">Tratamiento:</label>
+                <input type="text" th:field="*{tratamiento}" class="form-control" required />
+            </div>
 
-        <button type="submit">Guardar</button>
-        <a href="/consultas">Cancelar</a>
-    </form>
+            <div class="text-center mt-4">
+                <button type="submit" class="btn btn-success me-2">Guardar</button>
+                <a th:href="@{/consultas}" class="btn btn-secondary">Cancelar</a>
+            </div>
+        </form>
+    </div>
+
+    <footer class="text-center mt-5 mb-3 text-muted">
+        &copy; 2025 Sistema Médico
+    </footer>
+
+    <!-- Bootstrap 5 JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

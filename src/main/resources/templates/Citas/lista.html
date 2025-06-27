@@ -1,42 +1,111 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
 <head>
+    <meta charset="UTF-8" />
     <title>Listado de Citas</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <style>
+        body {
+            background: linear-gradient(135deg, #f0f2f5, #d6e4ff);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        .container {
+            flex: 1;
+            margin-top: 60px;
+        }
+        h1 {
+            color: #003366;
+            font-weight: 700;
+        }
+        .btn-primary {
+            background-color: #003366;
+            border-color: #003366;
+        }
+        footer {
+            font-size: 0.9rem;
+        }
+    </style>
 </head>
-<body class="container mt-4">
+<body>
+	<!-- Navbar debe ir dentro del body -->
+	    <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+	      <div class="container">
+	        <a class="navbar-brand font-weight-bold" href="/">Sistema Médico</a>
+	        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" 
+	          aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+	          <span class="navbar-toggler-icon"></span>
+	        </button>
+	        <div class="collapse navbar-collapse" id="navbarNav">
+	          <ul class="navbar-nav ml-auto">
+	            <li class="nav-item">
+	              <a class="nav-link" th:href="@{/pacientes}">Pacientes</a>
+	            </li>
+	            <li class="nav-item">
+	              <a class="nav-link" th:href="@{/medicos}">Médicos</a>
+	            </li>
+	            <li class="nav-item">
+	              <a class="nav-link" th:href="@{/consultas}">Consultas</a>
+	            </li>
+	            <li class="nav-item">
+	              <a class="nav-link" th:href="@{/citas}">Citas</a>
+	            </li>
+	          </ul>
+	        </div>
+	      </div>
+	    </nav>
 
-    <h1>Listado de Citas</h1>
+	    <!-- Espacio para que no quede detrás del navbar fijo -->
+	    <div style="height: 56px;"></div> 
+<div class="container">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1>Listado de Citas</h1>
+        <a th:href="@{/citas/nueva}" class="btn btn-primary">➕ Nueva Cita</a>
+    </div>
 
-    <a th:href="@{/citas/nueva}" class="btn btn-primary mb-3">Nueva Cita</a>
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover shadow-sm align-middle">
+            <thead class="table-primary text-center">
+                <tr>
+                    <th>ID</th>
+                    <th>Motivo</th>
+                    <th>Fecha y Hora</th>
+                    <th>Médico</th>
+                    <th>Paciente</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody class="text-center">
+                <tr th:each="cita : ${citas}">
+                    <td th:text="${cita.id}">1</td>
+                    <td th:text="${cita.motivo}">Consulta general</td>
+                    <td th:text="${#temporals.format(cita.fechaHora, 'dd/MM/yyyy HH:mm')}">27/06/2025 15:00</td>
+                    <td th:text="${cita.medico.nombre}">Dra. Ana</td>
+                    <td th:text="${cita.paciente.nombre}">Juan Pérez</td>
+                    <td>
+                        <a th:href="@{/citas/editar/{id}(id=${cita.id})}" class="btn btn-warning btn-sm me-1" title="Editar">✏️</a>
+                        <a th:href="@{/citas/eliminar/{id}(id=${cita.id})}" 
+                           class="btn btn-danger btn-sm" 
+                           onclick="return confirm('¿Seguro que desea eliminar esta cita?');" 
+                           title="Eliminar">🗑️</a>
+                    </td>
+                </tr>
+                <tr th:if="${#lists.isEmpty(citas)}">
+                    <td colspan="7" class="text-center text-muted">No hay citas registradas.</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
 
-    <table class="table table-bordered">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Motivo</th>
-                <th>Fecha y Hora</th>
-                <th>Estado</th>
-                <th>Medico</th>
-                <th>Paciente</th>
-                <th>Acciones</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr th:each="cita : ${citas}">
-                <td th:text="${cita.id}"></td>
-                <td th:text="${cita.motivo}"></td>
-                <td th:text="${#temporals.format(cita.fechaHora, 'yyyy-MM-dd HH:mm')}"></td>
-                <td th:text="${cita.estado}"></td>
-                <td th:text="${cita.medico.nombre}"></td>
-                <td th:text="${cita.paciente.nombre}"></td>
-                <td>
-                    <a th:href="@{/citas/editar/{id}(id=${cita.id})}" class="btn btn-warning btn-sm">Editar</a>
-                    <a th:href="@{/citas/eliminar/{id}(id=${cita.id})}" class="btn btn-danger btn-sm">Eliminar</a>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+<footer class="text-center mt-5 mb-3 text-muted">
+    &copy; 2025 Sistema Médico
+</footer>
 
+<!-- Bootstrap JS Bundle -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

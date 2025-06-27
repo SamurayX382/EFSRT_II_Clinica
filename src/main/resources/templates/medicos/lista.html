@@ -3,24 +3,115 @@
 <head>
     <meta charset="UTF-8">
     <title>Lista de Médicos</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
-<body class="bg-light">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
 
-    <div class="container mt-5">
+    <style>
+        body {
+            background: linear-gradient(135deg, #f0f2f5, #d6e4ff);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .container {
+            flex: 1;
+            margin-top: 60px;
+        }
+
+        h1 {
+            color: #003366;
+            font-weight: bold;
+        }
+
+        .btn-primary {
+            background-color: #003366;
+            border-color: #003366;
+        }
+
+        .input-group .form-control {
+            max-width: 400px;
+        }
+
+        footer {
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+	<!-- Navbar debe ir dentro del body -->
+	    <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+	      <div class="container">
+	        <a class="navbar-brand font-weight-bold" href="/">Sistema Médico</a>
+	        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" 
+	          aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+	          <span class="navbar-toggler-icon"></span>
+	        </button>
+	        <div class="collapse navbar-collapse" id="navbarNav">
+	          <ul class="navbar-nav ml-auto">
+	            <li class="nav-item">
+	              <a class="nav-link" th:href="@{/pacientes}">Pacientes</a>
+	            </li>
+	            <li class="nav-item">
+	              <a class="nav-link" th:href="@{/medicos}">Médicos</a>
+	            </li>
+	            <li class="nav-item">
+	              <a class="nav-link" th:href="@{/consultas}">Consultas</a>
+	            </li>
+	            <li class="nav-item">
+	              <a class="nav-link" th:href="@{/citas}">Citas</a>
+	            </li>
+	          </ul>
+	        </div>
+	      </div>
+	    </nav>
+
+	    <!-- Espacio para que no quede detrás del navbar fijo -->
+	    <div style="height: 56px;"></div> 
+		
+	<!-- Navbar debe ir dentro del body -->
+	    <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+	      <div class="container">
+	        <a class="navbar-brand font-weight-bold" href="/">Sistema Médico</a>
+	        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" 
+	          aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+	          <span class="navbar-toggler-icon"></span>
+	        </button>
+	        <div class="collapse navbar-collapse" id="navbarNav">
+	          <ul class="navbar-nav ml-auto">
+	            <li class="nav-item">
+	              <a class="nav-link" th:href="@{/pacientes}">Pacientes</a>
+	            </li>
+	            <li class="nav-item">
+	              <a class="nav-link" th:href="@{/medicos}">Médicos</a>
+	            </li>
+	            <li class="nav-item">
+	              <a class="nav-link" th:href="@{/consultas}">Consultas</a>
+	            </li>
+	            <li class="nav-item">
+	              <a class="nav-link" th:href="@{/citas}">Citas</a>
+	            </li>
+	          </ul>
+	        </div>
+	      </div>
+	    </nav>
+
+	    <!-- Espacio para que no quede detrás del navbar fijo -->
+	    <div style="height: 56px;"></div> 
+    <div class="container">
         <div class="d-flex justify-content-between align-items-center mb-4">
-            <h2 class="text-primary">Lista de Médicos</h2>
-            <a href="/medicos/nuevo" class="btn btn-success">+ Nuevo Médico</a>
+            <h1>Lista de Médicos</h1>
+            <a href="/medicos/nuevo" class="btn btn-primary">➕ Nuevo Médico</a>
         </div>
 
-        <form th:action="@{/medicos}" method="get" class="input-group mb-4">
-            <input type="text" name="buscar" th:value="${buscar}" class="form-control" placeholder="Buscar por nombre o especialidad" />
-            <button type="submit" class="btn btn-outline-primary">Buscar</button>
+        <form th:action="@{/medicos}" method="get" class="mb-4 d-flex flex-wrap gap-2 align-items-center">
+            <input type="text" name="buscar" th:value="${buscar}" class="form-control me-2" placeholder="Buscar por nombre o especialidad" />
+            <button type="submit" class="btn btn-outline-primary">🔍 Buscar</button>
         </form>
 
         <div class="table-responsive">
-            <table class="table table-bordered table-hover shadow-sm">
-                <thead class="table-primary text-center">
+            <table class="table table-bordered table-hover table-striped align-middle shadow-sm">
+                <thead class="table-dark text-center">
                     <tr>
                         <th>ID</th>
                         <th>Nombre</th>
@@ -40,10 +131,10 @@
                         <td th:text="${medico.telefono}">912345678</td>
                         <td th:text="${medico.correo}">ana@example.com</td>
                         <td>
-                            <a th:href="@{'/medicos/editar/' + ${medico.id}}" class="btn btn-sm btn-warning">Editar</a>
+                            <a th:href="@{'/medicos/editar/' + ${medico.id}}" class="btn btn-sm btn-warning me-1">✏️</a>
                             <a th:href="@{'/medicos/eliminar/' + ${medico.id}}" 
                                class="btn btn-sm btn-danger"
-                               onclick="return confirm('¿Seguro que desea eliminar este médico?');">Eliminar</a>
+                               onclick="return confirm('¿Seguro que desea eliminar este médico?');">🗑️</a>
                         </td>
                     </tr>
                     <tr th:if="${#lists.isEmpty(medicos)}">
@@ -54,7 +145,10 @@
         </div>
     </div>
 
-    <!-- Bootstrap JS (opcional) -->
+    <footer class="text-center mt-5 mb-3 text-muted">
+        &copy; 2025 Sistema Médico
+    </footer>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

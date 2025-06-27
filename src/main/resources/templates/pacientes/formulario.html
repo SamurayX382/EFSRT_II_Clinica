@@ -1,44 +1,115 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
 <head>
-    <title>Formulario Paciente</title>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8" />
+    <title>Formulario de Paciente</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+    <style>
+        body {
+            background: linear-gradient(135deg, #f0f2f5, #d6e4ff);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .container {
+            flex: 1;
+            max-width: 750px;
+            margin-top: 60px;
+        }
+
+        .card {
+            border-radius: 10px;
+        }
+
+        .card-header {
+            background-color: #003366;
+        }
+
+        .card-header h3 {
+            margin: 0;
+            color: white;
+        }
+
+        label {
+            font-weight: 500;
+        }
+
+        textarea.form-control {
+            resize: vertical;
+        }
+
+        footer {
+            font-size: 0.9rem;
+        }
+    </style>
 </head>
 <body>
-    <h1>Formulario de Paciente</h1>
-	
-    
-    <form th:action="@{/pacientes/guardar}" th:object="${paciente}" method="post">
-        <input type="hidden" th:field="*{id}" />
-        
-        <label>Nombre:</label>
-        <input type="text" th:field="*{nombre}" required /><br/><br/>
-        
-        <label>DNI:</label>
-        <input type="text" th:field="*{dni}" required /><br/><br/>
-        
-        <label>Teléfono:</label>
-        <input type="text" th:field="*{telefono}" /><br/><br/>
-        
-        <label>Fecha de Nacimiento:</label>
-        <input type="date" th:field="*{fechaNacimiento}" required /><br/><br/>
-        
-        <label>Historial Médico:</label><br/>
-        <textarea th:field="*{historialMedico}" rows="4" cols="50"></textarea><br/><br/>
-        
-        <label>Alergias:</label><br/>
-        <textarea th:field="*{alergias}" rows="2" cols="50"></textarea><br/><br/>
-        
-        <label>Medicamentos Recetados:</label><br/>
-        <textarea th:field="*{medicamentosRecetados}" rows="2" cols="50"></textarea><br/><br/>
-        
-        <label>Diagnósticos:</label><br/>
-        <textarea th:field="*{diagnosticos}" rows="3" cols="50"></textarea><br/><br/>
-        
-        <button type="submit">Guardar</button>
-    </form>
 
-    <br/>
-    <a th:href="@{/pacientes}">Volver a la lista</a>
+    <div class="container">
+        <div class="card shadow-lg">
+            <div class="card-header text-center">
+                <h3>Formulario de Registro de Paciente</h3>
+            </div>
+            <div class="card-body">
+                <form th:action="@{/pacientes/guardar}" th:object="${paciente}" method="post">
+                    <input type="hidden" th:field="*{id}" />
+
+                    <div class="mb-3">
+                        <label>Nombre:</label>
+                        <input type="text" th:field="*{nombre}" class="form-control" required />
+                    </div>
+
+                    <div class="mb-3">
+                        <label>DNI:</label>
+                        <input type="text" th:field="*{dni}" class="form-control" required />
+                    </div>
+
+                    <div class="mb-3">
+                        <label>Teléfono:</label>
+                        <input type="text" th:field="*{telefono}" class="form-control" />
+                    </div>
+
+                    <div class="mb-3">
+                        <label>Fecha de Nacimiento:</label>
+                        <input type="date" th:field="*{fechaNacimiento}" class="form-control" required />
+                    </div>
+
+                    <div class="mb-3">
+                        <label>Historial Médico:</label>
+                        <textarea th:field="*{historialMedico}" class="form-control" rows="4"></textarea>
+                    </div>
+
+                    <div class="mb-3">
+                        <label>Alergias:</label>
+                        <textarea th:field="*{alergias}" class="form-control" rows="2"></textarea>
+                    </div>
+
+                    <div class="mb-3">
+                        <label>Medicamentos Recetados:</label>
+                        <textarea th:field="*{medicamentosRecetados}" class="form-control" rows="2"></textarea>
+                    </div>
+
+                    <div class="mb-3">
+                        <label>Diagnósticos:</label>
+                        <textarea th:field="*{diagnosticos}" class="form-control" rows="3"></textarea>
+                    </div>
+
+                    <div class="d-flex justify-content-between">
+                        <a th:href="@{/pacientes}" class="btn btn-secondary">Volver a la lista</a>
+                        <button type="submit" class="btn btn-success">Guardar Paciente</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <footer class="text-center mt-5 mb-3 text-muted">
+        &copy; 2025 Sistema Médico
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
