@@ -31,4 +31,10 @@ public class MedicoService {
     public void eliminarMedico(Long id) {
     	medicoRepository.deleteById(id);
     }
+    public List<Medico> buscarMedicos(String filtro) {
+        if (filtro == null || filtro.trim().isEmpty()) {
+            return medicoRepository.findAll();
+        }
+        return medicoRepository.buscarPorNombreEspecialidadODni(filtro.trim());
+    }
 }

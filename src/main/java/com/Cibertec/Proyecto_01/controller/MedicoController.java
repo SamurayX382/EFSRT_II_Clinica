@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.Cibertec.Proyecto_01.model.Medico;
 import com.Cibertec.Proyecto_01.service.MedicoService;
@@ -23,9 +24,10 @@ public class MedicoController {
 
     // Lista medicos
     @GetMapping("")
-    public String listarMedico(Model model) {
-        model.addAttribute("medicos", medicoService.listarMedicos());
-        return "medicos/lista";  // plantilla Thymeleaf para mostrar lista
+    public String listarMedico(@RequestParam(name = "buscar", required = false) String buscar, Model model) {
+        model.addAttribute("buscar", buscar); // para mostrarlo en el input
+        model.addAttribute("medicos", medicoService.buscarMedicos(buscar));
+        return "medicos/lista";
     }
     
     // Mostrar formulario nuevo medico
